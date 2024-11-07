@@ -1,0 +1,56 @@
+package com.commercial_website.Entities;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.sql.Timestamp;
+import java.util.Set;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "orders")
+public class Order {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long orderId;
+
+    @Column
+    @CreationTimestamp
+    private Timestamp orderDate;
+
+    @Column
+    private String status;
+
+    @Column
+    private String orderNote;
+
+    @Column
+    private String totalPayment;
+
+    @Column
+    private String orderAddress;
+
+    @Column
+    private String phoneNumber;
+
+    @Column
+    private String paymentMethod;
+
+    @Column
+    private String shippingMethod;
+
+    @OneToOne
+    @JoinColumn(name = "userId", referencedColumnName = "userId")
+    private User user;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
+    private Set<LaptopOrder> laptopOrderSet;
+
+}
