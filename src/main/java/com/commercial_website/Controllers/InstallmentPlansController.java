@@ -37,7 +37,7 @@ public class InstallmentPlansController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<InstallmentPlansDTO> searchInstallmentPlans(@RequestParam String company) {
+    public ResponseEntity<Set<InstallmentPlansDTO>> searchInstallmentPlans(@RequestParam String company) {
         return ResponseEntity.ok(installmentPlansService.searchInstallmentPlans(company));
     }
 

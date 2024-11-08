@@ -47,9 +47,10 @@ public class ImplInstallmentPlansService implements InstallmentPlansService {
     }
 
     @Override
-    public InstallmentPlansDTO searchInstallmentPlans(String companyName) throws ResourceNotFoundException   {
-        InstallmentPlans search = installmentPlansRepository.findByCompanyContaining(companyName);
-        return mapper.mapToDTO(search);
+    public Set<InstallmentPlansDTO> searchInstallmentPlans(String companyName) throws ResourceNotFoundException   {
+        return installmentPlansRepository.findByCompanyContaining(companyName).stream()
+                .map(mapper::mapToDTO)
+                .collect(Collectors.toSet());
     }
 
     @Override
