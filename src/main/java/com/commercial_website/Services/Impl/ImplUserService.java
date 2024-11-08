@@ -11,6 +11,7 @@ import com.commercial_website.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -84,4 +85,43 @@ public class ImplUserService implements UserService {
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
+
+    @Override
+    public Set<UserDTO> getUsersByRole(String role) {
+        return userRepository.findUsersByRoleNameNative(role).stream()
+                .map(userMapper::mapToDTO)
+                .collect(Collectors.toSet());
+    }
+
+    @Override
+    public Set<UserDTO> getAllUsersByElements(String addressDetail, String ward, String district, String province, String fullname) {
+        Set<UserDTO> userDTOSet = new HashSet<>();
+        if (addressDetail != null && !addressDetail.isEmpty()) {
+            userDTOSet = userRepository.findByAddressDetailContaining(addressDetail)
+                    .stream().map(userMapper::mapToDTO)
+                    .collect(Collectors.toSet());
+        }
+        if (ward != null && !ward.isEmpty()) {
+            userDTOSet = userRepository.findByWardContaining(ward)
+                    .stream().map(userMapper::mapToDTO)
+                    .collect(Collectors.toSet());
+        }
+        if (district != null && !district.isEmpty()) {
+            userDTOSet = userRepository.findByDistrictContaining(district)
+                    .stream().map(userMapper::mapToDTO)
+                    .collect(Collectors.toSet());
+        }
+        if (province != null && !province.isEmpty()) {
+            userDTOSet = userRepository.findByProvinceContaining(province)
+                    .stream().map(userMapper::mapToDTO)
+                    .collect(Collectors.toSet());
+        }
+        if (fullname != null && !fullname.isEmpty()) {
+            userDTOSet = userRepository.findByFullnameContaining(fullname)
+                    .stream().map(userMapper::mapToDTO)
+                    .collect(Collectors.toSet());
+        }
+        return userDTOSet;
+    }
+
 }

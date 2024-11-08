@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/api/plans")
+@RequestMapping("/api/installments")
 public class InstallmentPlansController {
     @Autowired
     private InstallmentPlansService installmentPlansService;
@@ -25,7 +25,7 @@ public class InstallmentPlansController {
         return ResponseEntity.ok(getIP);
     }
 
-    @PostMapping("/create")
+    @PostMapping()
     public ResponseEntity<InstallmentPlansDTO> createInstallmentPlan(@RequestBody InstallmentPlansDTO plans) {
         return ResponseEntity.ok(installmentPlansService.createInstallmentPlans(plans));
     }
@@ -34,5 +34,15 @@ public class InstallmentPlansController {
     public ResponseEntity<String> deleteInstallmentPlan(@PathVariable Long id) {
         installmentPlansService.deleteInstallmentPlans(id);
         return ResponseEntity.ok("Installment plans deleted");
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<InstallmentPlansDTO> searchInstallmentPlans(@RequestParam String company) {
+        return ResponseEntity.ok(installmentPlansService.searchInstallmentPlans(company));
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<InstallmentPlansDTO> updateInstallmentPlan(@PathVariable Long id, @RequestBody InstallmentPlansDTO plans) {
+        return ResponseEntity.ok(installmentPlansService.updateInstallmentPlans(id, plans));
     }
 }

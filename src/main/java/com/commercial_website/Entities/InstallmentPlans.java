@@ -27,13 +27,13 @@ public class InstallmentPlans {
     private int downPayment; // Down payment
 
     @Column
-    private int term; // Term in months
+    private String term; // Term in months
 
     @Column
     private int monthlyInstallment; // Monthly installment
 
     @Column
-    private double flatInterestRate; // Flat interest rate
+    private String flatInterestRate; // Flat interest rate
 
     @Column
     private String requiredDocuments; // Required documents

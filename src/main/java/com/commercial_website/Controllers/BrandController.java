@@ -11,7 +11,6 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/api/brands")
-@CrossOrigin("*")
 public class BrandController {
 
     @Autowired
@@ -22,7 +21,7 @@ public class BrandController {
         return ResponseEntity.ok(brdSer.getAll());
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<BrandDTO> createBrd(@RequestBody BrandDTO brand){
         BrandDTO brd = brdSer.createBrand(brand);
         return new ResponseEntity<>(brd, HttpStatus.CREATED);

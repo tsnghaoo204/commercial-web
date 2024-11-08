@@ -11,7 +11,6 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/api/discounts")
-@CrossOrigin("*")
 public class DiscountController {
 
     @Autowired
@@ -22,7 +21,7 @@ public class DiscountController {
         return ResponseEntity.ok(disSer.getAll());
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<DiscountDTO> postMethodName(@RequestBody DiscountDTO disDTO) {
         DiscountDTO dis = disSer.createDiscount(disDTO);
         return new ResponseEntity<>(dis, HttpStatus.CREATED);

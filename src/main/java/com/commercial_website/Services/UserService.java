@@ -10,4 +10,6 @@ public interface UserService {
     UserDTO getUserById(Long id);
     UserDTO updateUser(Long id, UserDTO userDTO);
     void deleteUser(Long id);
+    Set<UserDTO> getUsersByRole(String role);
+    Set<UserDTO> getAllUsersByElements(String addressDetail, String ward, String district, String province, String fullname); ;
 }

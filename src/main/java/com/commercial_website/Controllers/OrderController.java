@@ -11,7 +11,6 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/api/orders")
-@CrossOrigin("*")
 public class OrderController {
 
     @Autowired
@@ -22,7 +21,7 @@ public class OrderController {
         return ResponseEntity.ok(orderService.getAllOrders());
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<OrderDTO> createOrder(@RequestBody OrderDTO orderDTO) {
         OrderDTO createdOrder = orderService.createOrder(orderDTO);
         return new ResponseEntity<>(createdOrder, HttpStatus.CREATED);

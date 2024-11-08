@@ -14,9 +14,9 @@ public class InstallmentPlansDTO {
     private String company;
     private int installmentPrice;
     private int downPayment;
-    private int term;
+    private String term;
     private int monthlyInstallment;
-    private double flatInterestRate;
+    private String flatInterestRate;
     private String requiredDocuments;
     private int totalPayment;
 

@@ -9,4 +9,6 @@ public interface InstallmentPlansService {
     InstallmentPlansDTO getInstallmentPlans(Long installmentPlanId);
     Set<InstallmentPlansDTO> getAllInstallmentPlans();
     void deleteInstallmentPlans(Long installmentPlanId);
+    InstallmentPlansDTO searchInstallmentPlans(String companyName);
+    InstallmentPlansDTO updateInstallmentPlans(Long id ,InstallmentPlansDTO installmentPlansDTO);
 }

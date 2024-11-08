@@ -11,7 +11,6 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/api/users")
-@CrossOrigin("*")
 public class UserController {
 
     @Autowired
@@ -22,7 +21,7 @@ public class UserController {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
         UserDTO createdUser = userService.createUser(userDTO);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
@@ -30,14 +29,12 @@ public class UserController {
 
     @GetMapping("{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
-        userService.getUserById(id);
         return ResponseEntity.ok(userService.getUserById(id));
     }
 
     @PutMapping("{id}")
     public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody UserDTO userDTO) {
-        userService.updateUser(id, userDTO);
-        return ResponseEntity.ok(userService.getUserById(id));
+        return ResponseEntity.ok(userService.updateUser(id, userDTO));
     }
 
     @DeleteMapping("{id}")
@@ -45,4 +42,19 @@ public class UserController {
         userService.deleteUser(id);
         return ResponseEntity.ok("Deleted User");
     }
+    @GetMapping("/role")
+    public ResponseEntity<Set<UserDTO>> getUserSet(@RequestParam String role) {
+        return ResponseEntity.ok(userService.getUsersByRole(role));
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<Set<UserDTO>> searchUser(@RequestParam(required = false) String addressDetail,
+                                                    @RequestParam(required = false) String ward,
+                                                    @RequestParam(required = false) String district,
+                                                    @RequestParam(required = false) String province,
+                                                    @RequestParam(required = false) String fullname) {
+        return ResponseEntity.ok(userService.getAllUsersByElements(addressDetail, ward, district, province, fullname));
+
+    }
+
 }

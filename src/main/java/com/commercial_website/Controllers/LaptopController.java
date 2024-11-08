@@ -22,7 +22,7 @@ public class LaptopController {
         return ResponseEntity.ok(lapSer.getAll());
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<LaptopDTO> createLaptop(@RequestBody LaptopDTO lapDTO) {
         LaptopDTO save = lapSer.createLaptop(lapDTO);
         return new ResponseEntity<>(save, HttpStatus.CREATED);
