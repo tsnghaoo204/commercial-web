@@ -1,5 +1,6 @@
 package com.commercial_website.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -46,10 +47,12 @@ public class Order {
     @Column
     private String shippingMethod;
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "userId", referencedColumnName = "userId")
     private User user;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     private Set<LaptopOrder> laptopOrderSet;
 

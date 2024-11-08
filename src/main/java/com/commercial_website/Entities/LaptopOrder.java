@@ -1,5 +1,6 @@
 package com.commercial_website.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,10 +18,12 @@ public class LaptopOrder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "laptopId")
     private Laptop laptop;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "orderId")
     private Order order;

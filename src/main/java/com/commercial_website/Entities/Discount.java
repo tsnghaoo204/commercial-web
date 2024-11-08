@@ -1,5 +1,6 @@
 package com.commercial_website.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,6 +23,7 @@ public class Discount {
     @Column
     private double discountPercent;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "discount")
     private Set<Laptop> laptops;
 }

@@ -1,5 +1,6 @@
 package com.commercial_website.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,6 +23,7 @@ public class Brand {
     @Column
     private String brandName;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "brand")
     private Set<Laptop> laptops;
 

@@ -1,5 +1,6 @@
 package com.commercial_website.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -69,14 +70,17 @@ public class Laptop {
     @Column
     private String image;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "brandId", referencedColumnName = "brandId")
     private Brand brand;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "discountId", referencedColumnName = "discountId")
     private Discount discount;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL ,mappedBy = "laptop")
     private Set<LaptopOrder> laptopOrderSet;
 }
