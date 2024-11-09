@@ -19,9 +19,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class ImplAuthService implements AuthService {
@@ -54,7 +52,7 @@ public class ImplAuthService implements AuthService {
         user.setEmail(dto.getEmail());
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
 
-        Set<Role> roles = new HashSet<>();
+        List<Role> roles = new LinkedList<>();
         Role userRole = roleRepository.findByRoleName("ROLE_USER");
         roles.add(userRole);
 

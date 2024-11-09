@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -29,10 +30,10 @@ public class ImplBrandService implements BrandService {
     }
 
     @Override
-    public Set<BrandDTO> getAll() {
+    public List<BrandDTO> getAll() {
         return repo.findAll().stream()
                 .map(brandMapper::mapToDTO)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     @Override

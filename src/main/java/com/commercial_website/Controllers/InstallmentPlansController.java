@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -15,7 +16,7 @@ public class InstallmentPlansController {
     private InstallmentPlansService installmentPlansService;
 
     @GetMapping
-    public ResponseEntity<Set<InstallmentPlansDTO>> getAllInstallmentPlans() {
+    public ResponseEntity<List<InstallmentPlansDTO>> getAllInstallmentPlans() {
         return ResponseEntity.ok(installmentPlansService.getAllInstallmentPlans());
     }
 
@@ -37,7 +38,7 @@ public class InstallmentPlansController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<Set<InstallmentPlansDTO>> searchInstallmentPlans(@RequestParam String company) {
+    public ResponseEntity<List<InstallmentPlansDTO>> searchInstallmentPlans(@RequestParam String company) {
         return ResponseEntity.ok(installmentPlansService.searchInstallmentPlans(company));
     }
 

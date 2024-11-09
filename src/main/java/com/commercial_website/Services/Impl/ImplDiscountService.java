@@ -9,6 +9,7 @@ import com.commercial_website.Services.DiscountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -29,10 +30,10 @@ public class ImplDiscountService implements DiscountService {
     }
 
     @Override
-    public Set<DiscountDTO> getAll() {
+    public List<DiscountDTO> getAll() {
         return repo.findAll().stream()
                 .map(discountMapper::mapToDTO)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     @Override

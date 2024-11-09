@@ -12,6 +12,7 @@ import com.commercial_website.Services.LaptopOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -43,9 +44,9 @@ public class ImplLaptopOrderService implements LaptopOrderService {
     }
 
     @Override
-    public Set<LaptopOrderDTO> getAll() {
+    public List<LaptopOrderDTO> getAll() {
         return lapOrderRepository.findAll().stream()
                 .map(mapper::mapToDTO)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 }

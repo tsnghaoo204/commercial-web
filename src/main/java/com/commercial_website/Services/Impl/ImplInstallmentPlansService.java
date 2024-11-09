@@ -9,6 +9,7 @@ import com.commercial_website.Services.InstallmentPlansService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -35,10 +36,10 @@ public class ImplInstallmentPlansService implements InstallmentPlansService {
     }
 
     @Override
-    public Set<InstallmentPlansDTO> getAllInstallmentPlans() {
+    public List<InstallmentPlansDTO> getAllInstallmentPlans() {
         return installmentPlansRepository.findAll().stream()
                 .map(mapper::mapToDTO)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -47,10 +48,10 @@ public class ImplInstallmentPlansService implements InstallmentPlansService {
     }
 
     @Override
-    public Set<InstallmentPlansDTO> searchInstallmentPlans(String companyName) throws ResourceNotFoundException   {
+    public List<InstallmentPlansDTO> searchInstallmentPlans(String companyName) throws ResourceNotFoundException   {
         return installmentPlansRepository.findByCompanyContaining(companyName).stream()
                 .map(mapper::mapToDTO)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     @Override

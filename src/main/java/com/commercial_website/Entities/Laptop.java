@@ -10,6 +10,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -82,5 +83,5 @@ public class Laptop {
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL ,mappedBy = "laptop")
-    private Set<LaptopOrder> laptopOrderSet;
+    private List<LaptopOrder> laptopOrderSet;
 }

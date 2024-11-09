@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Set;
+import java.util.List;
 
 @Getter
 @Setter
@@ -25,6 +25,6 @@ public class Brand {
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "brand")
-    private Set<Laptop> laptops;
+    private List<Laptop> laptops;
 
 }

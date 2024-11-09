@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Set;
+import java.util.List;
 
 @Getter
 @Setter
@@ -25,5 +25,5 @@ public class Discount {
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "discount")
-    private Set<Laptop> laptops;
+    private List<Laptop> laptops;
 }

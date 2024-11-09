@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -17,7 +18,7 @@ public class LaptopOrderController {
     LaptopOrderService laptopOrderService;
 
     @GetMapping
-    public ResponseEntity<Set<LaptopOrderDTO>> getAlls() {
+    public ResponseEntity<List<LaptopOrderDTO>> getAlls() {
         return ResponseEntity.ok(laptopOrderService.getAll());
     }
 

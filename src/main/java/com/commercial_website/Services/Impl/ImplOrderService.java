@@ -10,6 +10,7 @@ import com.commercial_website.Services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -35,9 +36,9 @@ public class ImplOrderService implements OrderService {
     }
 
     @Override
-    public Set<OrderDTO> getAllOrders() {
+    public List<OrderDTO> getAllOrders() {
         return orderRepository.findAll().stream()
                 .map(orderMapper::mapToDTO)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 }

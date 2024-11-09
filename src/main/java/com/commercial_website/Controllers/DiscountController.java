@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -17,7 +18,7 @@ public class DiscountController {
     DiscountService disSer;
 
     @GetMapping
-    public ResponseEntity<Set<DiscountDTO>> getAlls() {
+    public ResponseEntity<List<DiscountDTO>> getAlls() {
         return ResponseEntity.ok(disSer.getAll());
     }
 

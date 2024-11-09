@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -54,6 +55,6 @@ public class Order {
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
-    private Set<LaptopOrder> laptopOrderSet;
+    private List<LaptopOrder> laptopOrderSet;
 
 }

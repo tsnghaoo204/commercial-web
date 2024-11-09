@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -22,17 +23,17 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "JOIN user_role ur ON u.userId = ur.userId " +
             "JOIN role r ON ur.roleId = r.roleId " +
             "WHERE r.roleName = :roleName", nativeQuery = true)
-    Set<User> findUsersByRoleNameNative(@Param("roleName") String roleName);
+    List<User> findUsersByRoleNameNative(@Param("roleName") String roleName);
 
 
-    Set<User> findByFullnameContaining(String fullname);
+    List<User> findByFullnameContaining(String fullname);
 
-    Set<User> findByWardContaining(String ward);
+    List<User> findByWardContaining(String ward);
 
-    Set<User> findByDistrictContaining(String district);
+    List<User> findByDistrictContaining(String district);
 
-    Set<User> findByProvinceContaining(String province);
+    List<User> findByProvinceContaining(String province);
 
-    Set<User> findByAddressDetailContaining(String addressDetail);
+    List<User> findByAddressDetailContaining(String addressDetail);
 
 }

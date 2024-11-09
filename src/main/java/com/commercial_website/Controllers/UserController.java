@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -17,7 +18,7 @@ public class UserController {
     UserService userService;
 
     @GetMapping
-    public ResponseEntity<Set<UserDTO>> getAllUsers() {
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
@@ -43,12 +44,12 @@ public class UserController {
         return ResponseEntity.ok("Deleted User");
     }
     @GetMapping("/role")
-    public ResponseEntity<Set<UserDTO>> getUserSet(@RequestParam String role) {
+    public ResponseEntity<List<UserDTO>> getUserSet(@RequestParam String role) {
         return ResponseEntity.ok(userService.getUsersByRole(role));
     }
 
     @GetMapping("/search")
-    public ResponseEntity<Set<UserDTO>> searchUser(@RequestParam(required = false) String addressDetail,
+    public ResponseEntity<List<UserDTO>> searchUser(@RequestParam(required = false) String addressDetail,
                                                     @RequestParam(required = false) String ward,
                                                     @RequestParam(required = false) String district,
                                                     @RequestParam(required = false) String province,

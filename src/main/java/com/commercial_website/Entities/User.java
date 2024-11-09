@@ -10,6 +10,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -67,7 +68,7 @@ public class User {
             joinColumns = @JoinColumn(name = "userId", referencedColumnName = "userId"),
             inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "roleId")
     )
-    private Set<Role> roles;
+    private List<Role> roles;
 
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")

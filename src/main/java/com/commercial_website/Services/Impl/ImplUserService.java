@@ -11,9 +11,7 @@ import com.commercial_website.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,10 +34,10 @@ public class ImplUserService implements UserService {
     }
 
     @Override
-    public Set<UserDTO> getAllUsers() {
+    public List<UserDTO> getAllUsers() {
         return userRepository.findAll().stream()
                 .map(userMapper::mapToDTO)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -87,39 +85,39 @@ public class ImplUserService implements UserService {
     }
 
     @Override
-    public Set<UserDTO> getUsersByRole(String role) {
+    public List<UserDTO> getUsersByRole(String role) {
         return userRepository.findUsersByRoleNameNative(role).stream()
                 .map(userMapper::mapToDTO)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Set<UserDTO> getAllUsersByElements(String addressDetail, String ward, String district, String province, String fullname) {
-        Set<UserDTO> userDTOSet = new HashSet<>();
+    public List<UserDTO> getAllUsersByElements(String addressDetail, String ward, String district, String province, String fullname) {
+        List<UserDTO> userDTOSet = new LinkedList<>();
         if (addressDetail != null && !addressDetail.isEmpty()) {
             userDTOSet = userRepository.findByAddressDetailContaining(addressDetail)
                     .stream().map(userMapper::mapToDTO)
-                    .collect(Collectors.toSet());
+                    .collect(Collectors.toList());
         }
         if (ward != null && !ward.isEmpty()) {
             userDTOSet = userRepository.findByWardContaining(ward)
                     .stream().map(userMapper::mapToDTO)
-                    .collect(Collectors.toSet());
+                    .collect(Collectors.toList());
         }
         if (district != null && !district.isEmpty()) {
             userDTOSet = userRepository.findByDistrictContaining(district)
                     .stream().map(userMapper::mapToDTO)
-                    .collect(Collectors.toSet());
+                    .collect(Collectors.toList());
         }
         if (province != null && !province.isEmpty()) {
             userDTOSet = userRepository.findByProvinceContaining(province)
                     .stream().map(userMapper::mapToDTO)
-                    .collect(Collectors.toSet());
+                    .collect(Collectors.toList());
         }
         if (fullname != null && !fullname.isEmpty()) {
             userDTOSet = userRepository.findByFullnameContaining(fullname)
                     .stream().map(userMapper::mapToDTO)
-                    .collect(Collectors.toSet());
+                    .collect(Collectors.toList());
         }
         return userDTOSet;
     }

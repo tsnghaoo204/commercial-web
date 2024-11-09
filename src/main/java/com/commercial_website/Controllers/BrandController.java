@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -17,7 +18,7 @@ public class BrandController {
     BrandService brdSer;
 
     @GetMapping
-    public ResponseEntity<Set<BrandDTO>> getAlls() {
+    public ResponseEntity<List<BrandDTO>> getAlls() {
         return ResponseEntity.ok(brdSer.getAll());
     }
 

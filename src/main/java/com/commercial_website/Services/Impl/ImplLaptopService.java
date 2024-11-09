@@ -1,20 +1,19 @@
 package com.commercial_website.Services.Impl;
 
 import com.commercial_website.DTOs.LaptopDTO;
+import com.commercial_website.DTOs.TopSellingBrandDTO;
 import com.commercial_website.Entities.Laptop;
 import com.commercial_website.Exception.ResourceNotFoundException;
 import com.commercial_website.Mappers.LaptopMapper;
 import com.commercial_website.Repositories.BrandRepository;
 import com.commercial_website.Repositories.DiscountRepository;
+import com.commercial_website.Repositories.LapOrderRepository;
 import com.commercial_website.Repositories.LaptopRepository;
 import com.commercial_website.Services.LaptopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,6 +29,9 @@ public class ImplLaptopService implements LaptopService {
     LaptopRepository repo;
 
     @Autowired
+    LapOrderRepository  lapOrderRepo;
+
+    @Autowired
     LaptopMapper laptopMapper;
 
     @Override
@@ -40,10 +42,10 @@ public class ImplLaptopService implements LaptopService {
     }
 
     @Override
-    public Set<LaptopDTO> getAll() {
+    public List<LaptopDTO> getAll() {
         return repo.findAll().stream()
                 .map(laptopMapper::mapToDTO)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -54,47 +56,47 @@ public class ImplLaptopService implements LaptopService {
     }
 
     @Override
-    public Set<LaptopDTO> searchLaptops(String model, String ram, String gpu, String processor, String storage, Integer price, Double sz, String brandName) {
-        Set<LaptopDTO> laptops = new HashSet<>();
+    public List<LaptopDTO> searchLaptops(String model, String ram, String gpu, String processor, String storage, Integer price, Double sz, String brandName) {
+        List<LaptopDTO> laptops = new LinkedList<>();
         if (model != null && !model.isEmpty()) {
             laptops = repo.findByModelContaining(model).stream()
                     .map(laptopMapper::mapToDTO)
-                    .collect(Collectors.toSet());
+                    .collect(Collectors.toList());
         }
         if (gpu != null && !gpu.isEmpty()) {
             laptops = repo.findByGpuContaining(gpu).stream()
                     .map(laptopMapper::mapToDTO)
-                    .collect(Collectors.toSet());
+                    .collect(Collectors.toList());
         }
         if (processor != null && !processor.isEmpty()) {
             laptops = repo.findByProcessorContaining(processor).stream()
                     .map(laptopMapper::mapToDTO)
-                    .collect(Collectors.toSet());
+                    .collect(Collectors.toList());
         }
         if (storage != null && !storage.isEmpty()) {
             laptops = repo.findByStorageContaining(storage).stream()
                     .map(laptopMapper::mapToDTO)
-                    .collect(Collectors.toSet());
+                    .collect(Collectors.toList());
         }
         if (ram != null && !ram.isEmpty()) {
             laptops = repo.findByRamContaining(ram).stream()
                     .map(laptopMapper::mapToDTO)
-                    .collect(Collectors.toSet());
+                    .collect(Collectors.toList());
         }
         if (price != null) {
             laptops = repo.findByPrice(price).stream()
                     .map(laptopMapper::mapToDTO)
-                    .collect(Collectors.toSet());
+                    .collect(Collectors.toList());
         }
         if (sz != null) {
             laptops = repo.findByScreenSizeGreaterThan(sz).stream()
                     .map(laptopMapper::mapToDTO)
-                    .collect(Collectors.toSet());
+                    .collect(Collectors.toList());
         }
         if (brandName != null && !brandName.isEmpty()) {
             laptops = repo.findByBrand_BrandNameContaining(brandName).stream()
                     .map(laptopMapper::mapToDTO)
-                    .collect(Collectors.toSet());
+                    .collect(Collectors.toList());
         }
         return laptops;
     }
@@ -139,6 +141,20 @@ public class ImplLaptopService implements LaptopService {
 
         // Convert back to DTO for return
         return laptopMapper.mapToDTO(savedLaptop);
+    }
+
+    @Override
+    public List<TopSellingBrandDTO> getTopSellingBrands() {
+        List<Object[]> results = lapOrderRepo.findTopSellingBrands();
+        List<TopSellingBrandDTO> response = new ArrayList<>();
+
+        for (Object[] row : results) {
+            String brandName = (String) row[0];
+            Long totalSold = ((Number) row[1]).longValue();
+            response.add(new TopSellingBrandDTO(brandName, totalSold));
+        }
+
+        return response;
     }
 
 
