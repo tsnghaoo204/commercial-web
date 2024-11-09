@@ -11,6 +11,10 @@ import com.commercial_website.Repositories.LapOrderRepository;
 import com.commercial_website.Repositories.LaptopRepository;
 import com.commercial_website.Services.LaptopService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -155,6 +159,13 @@ public class ImplLaptopService implements LaptopService {
         }
 
         return response;
+    }
+
+    @Override
+    public Page<LaptopDTO> getLaptopsByBrand(Long brandId, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Order.asc("price")));
+        Page<Laptop> laptopPage = repo.findByBrand_BrandId(brandId, pageable);
+        return laptopPage.map(laptopMapper::mapToDTO);
     }
 
 

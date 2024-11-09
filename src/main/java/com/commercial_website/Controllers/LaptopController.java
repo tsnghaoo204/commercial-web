@@ -4,6 +4,7 @@ import com.commercial_website.DTOs.LaptopDTO;
 import com.commercial_website.DTOs.TopSellingBrandDTO;
 import com.commercial_website.Services.LaptopService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,13 @@ public class LaptopController {
     @Autowired
     LaptopService lapSer;
 
+    @GetMapping("/request-page")
+    public Page<LaptopDTO> getLaptops(
+            @RequestParam Long brandId,
+            @RequestParam int page,
+            @RequestParam int size) {
+        return lapSer.getLaptopsByBrand(brandId, page, size);
+    }
     @GetMapping
     public ResponseEntity<List<LaptopDTO>> getAlls() {
         return ResponseEntity.ok(lapSer.getAll());

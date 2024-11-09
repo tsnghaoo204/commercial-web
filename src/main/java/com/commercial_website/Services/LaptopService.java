@@ -3,6 +3,7 @@ package com.commercial_website.Services;
 import com.commercial_website.DTOs.LaptopDTO;
 import com.commercial_website.DTOs.TopSellingBrandDTO;
 import com.commercial_website.Entities.Laptop;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Map;
@@ -17,4 +18,6 @@ public interface LaptopService {
     LaptopDTO updateLaptop(Long id ,LaptopDTO lapDTO);
 
     List<TopSellingBrandDTO> getTopSellingBrands();
+
+    Page<LaptopDTO> getLaptopsByBrand(Long brandId, int page, int size);
 }
