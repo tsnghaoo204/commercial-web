@@ -23,7 +23,7 @@ public class OrderDTO {
 
     private String orderNote;
 
-    private String totalPayment;
+    private int totalPayment;
 
     private String orderAddress;
 

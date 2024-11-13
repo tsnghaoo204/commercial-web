@@ -1,9 +1,11 @@
 package com.commercial_website.Services.Impl;
 
 import com.commercial_website.DTOs.OrderDTO;
+import com.commercial_website.Entities.LaptopOrder;
 import com.commercial_website.Entities.Order;
 import com.commercial_website.Entities.User;
 import com.commercial_website.Mappers.OrderMapper;
+import com.commercial_website.Repositories.LapOrderRepository;
 import com.commercial_website.Repositories.OrderRepository;
 import com.commercial_website.Repositories.UserRepository;
 import com.commercial_website.Services.OrderService;
@@ -24,6 +26,9 @@ public class ImplOrderService implements OrderService {
     private UserRepository userRepository;
 
     @Autowired
+    private LapOrderRepository lapOrderRepository;
+
+    @Autowired
     OrderMapper orderMapper;
 
     @Override
@@ -31,6 +36,8 @@ public class ImplOrderService implements OrderService {
         Order order = orderMapper.mapToEntity(orderDTO);
         User user = userRepository.findByFullname(orderDTO.getUserName());
         order.setUser(user);
+        LaptopOrder  laptopOrder = lapOrderRepository.findByOrder_OrderId(order.getOrderId());
+        order.setTotalPayment(laptopOrder.getTotalPrice());
         Order savedOrder = orderRepository.save(order);
         return orderMapper.mapToDTO(savedOrder);
     }

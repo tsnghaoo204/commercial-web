@@ -1,6 +1,7 @@
 package com.commercial_website.Repositories;
 
 import com.commercial_website.Entities.LaptopOrder;
+import com.commercial_website.Entities.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -15,4 +16,6 @@ public interface LapOrderRepository extends JpaRepository<LaptopOrder, Long> {
             "GROUP BY b.brandName " +
             "ORDER BY totalSold DESC")
     List<Object[]> findTopSellingBrands();
+
+    LaptopOrder findByOrder_OrderId(Long orderId);
 }

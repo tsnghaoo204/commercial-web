@@ -34,7 +34,7 @@ public class Order {
     private String orderNote;
 
     @Column
-    private String totalPayment;
+    private int totalPayment;
 
     @Column
     private String orderAddress;
